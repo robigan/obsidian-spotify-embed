@@ -1,4 +1,4 @@
-import {Plugin} from 'obsidian';
+import { Plugin } from "obsidian";
 
 const embedTemplates = new Map([
     [/spotify:track:(?<id>\w+)/, (id: string) => `<iframe src="https://open.spotify.com/embed/track/${id}" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`],
@@ -17,13 +17,13 @@ const embedTemplates = new Map([
 
 export default class SpotifyPlugin extends Plugin {
     async onload() {
-        console.log('loading plugin');
+        console.debug("Loading Obsidian Spotify plugin");
 
         this.registerMarkdownPostProcessor((el: HTMLElement) => {
             el.querySelectorAll("img").forEach((img) => {
                 embedTemplates.forEach((embed, regex) => {
-                    let match = img.src.match(regex);
-                    if (match) {
+                    const match = img.src.match(regex);
+                    if (match && match.groups) {
                         img.outerHTML = embed(match.groups.id);
                     }
                 });

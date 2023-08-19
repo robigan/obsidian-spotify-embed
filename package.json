@@ -1,23 +1,31 @@
 {
   "name": "obsidian-spotify-embed",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Obisidian plugin to allow you to embed Spotify playlists or songs in your Obsidian markdown documents.",
   "main": "main.js",
   "scripts": {
-    "dev": "rollup --config rollup.config.js -w",
-    "build": "rollup --config rollup.config.js"
+    "dev": "cp manifest.json build/manifest.json && cp versions.json build/versions.json && node esbuild.config.mjs",
+    "build": "cp manifest.json build/manifest.json && cp versions.json build/versions.json && tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+    "version": "node version-bump.mjs && git add manifest.json versions.json",
+    "clean": "rimraf build"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^15.1.0",
-    "@rollup/plugin-node-resolve": "^9.0.0",
-    "@rollup/plugin-typescript": "^6.0.0",
-    "@types/node": "^14.14.2",
-    "obsidian": "https://github.com/obsidianmd/obsidian-api/tarball/master",
-    "rollup": "^2.32.1",
-    "tslib": "^2.0.3",
-    "typescript": "^4.0.3"
+    "@types/node": "^20.5.1",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.4.0",
+    "esbuild": "0.19.2",
+    "eslint": "^8.47.0",
+    "obsidian": "^1.4.0",
+    "rimraf": "^5.0.1",
+    "tslib": "^2.6.2",
+    "typescript": "*"
+  },
+  "resolutions": {
+    "strip-ansi": "^6.0.1",
+    "string-width": "^4.2.2",
+    "wrap-ansi": "^7.0.0"
   }
 }
