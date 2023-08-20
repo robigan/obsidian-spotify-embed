@@ -4,8 +4,9 @@
   "description": "Obisidian plugin to allow you to embed Spotify playlists or songs in your Obsidian markdown documents.",
   "main": "main.js",
   "scripts": {
-    "dev": "cp manifest.json build/manifest.json && cp versions.json build/versions.json && node esbuild.config.mjs",
-    "build": "cp manifest.json build/manifest.json && cp versions.json build/versions.json && tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+    "cp": "mkdir -p build && cp manifest.json build/manifest.json && cp versions.json build/versions.json",
+    "dev": "yarn cp && node esbuild.config.mjs",
+    "build": "yarn cp && tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
     "version": "node version-bump.mjs && git add manifest.json versions.json",
     "clean": "rimraf build"
   },
